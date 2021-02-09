@@ -17,11 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
 Route::get('/list',[\App\Http\Controllers\CityController::class,'index'])->name('cities.list');
+Route::get('/update/{code}',[\App\Http\Controllers\CityController::class,'update'])->name('city.update');
 
 //Route::get('/weather/{code}', [\App\Http\Controllers\WeatherController::class, 'fetch'])->name('weather.get');
 Route::get('/weather', [\App\Http\Controllers\WeatherController::class, 'fetch'])->name('weather.get');

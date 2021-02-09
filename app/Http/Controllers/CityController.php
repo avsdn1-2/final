@@ -20,14 +20,24 @@ class CityController extends Controller
 
         //return redirect(route('weather.get', ['code' => $cities[0]->code]));
 
+        $dataFavorite = [];
+        $dataUnfavorite = [];
         $data = [];
         foreach ($cities as $city)
         {
             $cityData = Cache::get($city->code);
-            $data[$city->code] = $cityData;
+            if ($city->favorite == true){
+                $dataFavorite[$city->code] = array_merge($cityData,['favorite' => $city->favorite]);
+            } else {
+                $dataUnfavorite[$city->code] = array_merge($cityData,['favorite' => $city->favorite]);
+            }
+            //$data[$city->code] = array_merge($cityData,['favorite' => $city->favorite]);
+
             //var_dump($cityData);
             //echo '<br>';
         }
+        $data = array_merge($dataFavorite,$dataUnfavorite);
+        //dd($data);
 
 
         return view('city.index',
@@ -86,9 +96,22 @@ class CityController extends Controller
      * @param  \App\Models\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, City $city)
+    //public function update(Request $request, City $city)
+    public function update($code)
     {
         //
+        $city = City::where('code',$code)->first();;
+        //dd($city);
+
+        if ($city->favorite == false) {
+            $city->favorite = true;
+        } else {
+            $city->favorite = false;
+        }
+        $city->save();
+
+        return redirect(route('cities.list'));
+
     }
 
     /**
