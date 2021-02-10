@@ -93,6 +93,8 @@
             <div class="mt-3 space-y-1">
                 <!-- Authentication -->
                 @if(Auth::check())
+                    <a href="{{ url('/weather') }}" class="text-sm text-gray-700 underline" style="margin:0 30px 0 40px;float:left;">Weather</a>
+
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 

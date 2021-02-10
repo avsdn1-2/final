@@ -16,6 +16,4 @@ interface MetarServiceInterface
      * @return mixed
      */
     public function getWeather(string $icao, $refreshTime = self::REFRESH_TIME);
-
-    public function all();
 }

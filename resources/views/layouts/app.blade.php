@@ -29,9 +29,11 @@
                 @if (Route::has('login'))
                     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
+
                         @else
-                            <div style="width:250px;float:right;">
+                            <div style="width:250px;float:left;">
+                                <a href="{{ url('/weather') }}" style="margin:0 30px 0 40px;" class="text-sm text-gray-700 underline">Weather</a>
+
                                 <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
 
                                 @if (Route::has('register'))
